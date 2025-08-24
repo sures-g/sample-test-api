@@ -10,7 +10,7 @@ permissions:
   id-token: 'write'
 
 env:
-  # GKE cluster configuration-1
+  # GKE cluster configuration-11
   REGISTRY: ghcr.io
   GKE_CLUSTER: sample-test
   GKE_ZONE: asia-east1-a # e.g., us-central1-c
