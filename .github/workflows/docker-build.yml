@@ -9,6 +9,7 @@ env:
   REGISTRY: ghcr.io
   GKE_CLUSTER: sample-test
   GKE_ZONE: asia-east1-a # e.g., us-central1-c
+  PROJECT_ID: for-tech-practice
   
   # GHCR image details
   GHCR_IMAGE: ghcr.io/${{ github.repository }}
@@ -52,7 +53,7 @@ jobs:
         with:
           cluster_name: ${{ env.GKE_CLUSTER }}
           location: ${{ env.GKE_ZONE }}
-
+          project_id: ${{ env.PROJECT_ID }}
 
       - name: Deploy to GKE
         run: |
