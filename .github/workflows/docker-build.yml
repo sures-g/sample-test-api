@@ -6,11 +6,12 @@ on:
       - main # Trigger on pushes to the main branch
 env:
   # GKE cluster configuration
+  REGISTRY: ghcr.io
   GKE_CLUSTER: sample-test
   GKE_ZONE: asia-east1-a # e.g., us-central1-c
   
   # GHCR image details
-  GHCR_IMAGE: ghcr.io/${{ github.repository }}
+  GHCR_IMAGE: ${{env.REGISTRY}}/${{ github.repository }}
   GHCR_IMAGE_TAG: ${{ github.sha }}
 
 jobs:
