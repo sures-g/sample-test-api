@@ -60,13 +60,6 @@ jobs:
           workload_identity_provider: 'projects/183944825075/locations/global/workloadIdentityPools/github-p/providers/github'
           service_account: 'github-actions-sa@for-tech-practice.iam.gserviceaccount.com'
 
-      - name: Get GKE credentials
-        uses: google-github-actions/get-gke-credentials@v2
-        with:
-          cluster_name: ${{ env.GKE_CLUSTER }}
-          location: ${{ env.GKE_ZONE }}
-          project_id: ${{ env.PROJECT_ID }}
-
       - name: Deploy to GKE
         run: |
          kubectl apply -f k8s/
