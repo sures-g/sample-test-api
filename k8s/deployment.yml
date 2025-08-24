@@ -1,0 +1,27 @@
+# deployment.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ghcr-app-deployment
+  labels:
+    app: sample-test-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sample-test-api
+  template:
+    metadata:
+      labels:
+        app: sample-test-api
+    spec:
+      containers:
+      - name: sample-container
+        # Replace with your image name and tag from GHCR
+        image: ghcr.io/sures-g/sample-test-api:latest
+        ports:
+        - containerPort: 8080
+      # This is where you reference the secret
+      imagePullSecrets:
+      - name: ghcr-pull-secret

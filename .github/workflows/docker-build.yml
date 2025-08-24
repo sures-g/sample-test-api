@@ -4,10 +4,14 @@ on:
   push:
     branches:
       - main # Trigger on pushes to the main branch
-
 env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  # GKE cluster configuration
+  GKE_CLUSTER: sample-test
+  GKE_ZONE: asia-east1-a # e.g., us-central1-c
+  
+  # GHCR image details
+  GHCR_IMAGE: ghcr.io/${{ github.repository }}
+  GHCR_IMAGE_TAG: ${{ github.sha }}
 
 jobs:
   build-and-push:
@@ -38,4 +42,18 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository }}:latest
+          tags: ${{ env.GHCR_IMAGE }}:${{ env.GHCR_IMAGE_TAG }}
+
+
+      - name: Get GKE credentials
+        uses: google-github-actions/get-gke-credentials@v2
+        with:
+          cluster_name: ${{ env.GKE_CLUSTER }}
+          location: ${{ env.GKE_ZONE }}
+
+
+      - name: Deploy to GKE
+        run: |
+         kubectl apply -f k8s/
+         kubectl set image deployment/sample-test-api sample-container=${{ env.GHCR_IMAGE }}:${{ env.GHCR_IMAGE_TAG }}
+         
