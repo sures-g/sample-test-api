@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main # Trigger on pushes to the main branch
+
+permissions:
+  contents: 'read'
+  id-token: 'write'
+
 env:
   # GKE cluster configuration
   REGISTRY: ghcr.io
@@ -21,6 +26,7 @@ jobs:
     permissions:
       contents: read
       packages: write
+      id-token: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
