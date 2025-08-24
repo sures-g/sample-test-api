@@ -57,7 +57,7 @@ jobs:
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v2'
         with:
-          workload_identity_provider: 'projects/183944825075/locations/global/workloadIdentityPools/github-p/providers/github-p'
+          workload_identity_provider: 'projects/183944825075/locations/global/workloadIdentityPools/github-p/providers/git'
           service_account: 'github-actions-sa@for-tech-practice.iam.gserviceaccount.com'
 
       - name: Get GKE credentials
