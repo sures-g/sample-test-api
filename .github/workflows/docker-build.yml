@@ -62,6 +62,10 @@ jobs:
 
       - name: Deploy to GKE
         run: |
+         gcloud container clusters get-credentials sample-test --region asia-east1 --project for-tech-practice
+         
+      - name: Deploy to GKE
+        run: |
          kubectl apply -f deployment.yml --validate=false
          kubectl set image deployment/sample-test-api sample-container=${{ env.GHCR_IMAGE }}:${{ env.GHCR_IMAGE_TAG }}
          
