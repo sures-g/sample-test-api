@@ -60,6 +60,9 @@ jobs:
           workload_identity_provider: 'projects/183944825075/locations/global/workloadIdentityPools/github-p/providers/github'
           service_account: 'github-actions-sa@for-tech-practice.iam.gserviceaccount.com'
 
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
       - name: Deploy to GKE
         run: |
          gcloud container clusters get-credentials sample-test --region asia-east1 --project for-tech-practice
