@@ -3,7 +3,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ghcr-app-deployment
+  name: sample-test-api
   labels:
     app: sample-test-api
 spec:
