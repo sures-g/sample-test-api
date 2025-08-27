@@ -62,8 +62,14 @@ jobs:
 
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
-
-      - name: Deploy to GKE
+        with:
+          project_id: for-tech-practice
+    
+      - name: Install gke-gcloud-auth-plugin
+        run: |
+         gcloud components install gke-gcloud-auth-plugin
+    
+      - name: Get GKE Credentials
         run: |
          gcloud container clusters get-credentials sample-test --region asia-east1 --project for-tech-practice
          
