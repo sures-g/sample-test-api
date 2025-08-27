@@ -7,7 +7,7 @@ metadata:
   labels:
     app: sample-test-api
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: sample-test-api
@@ -22,6 +22,24 @@ spec:
         image: ghcr.io/sures-g/sample-test-api:latest
         ports:
         - containerPort: 8080
+
+        # Liveness and Readiness Probes
+        livenessProbe:
+         httpGet:
+          path: /actuator/health
+          port: 8080
+         initialDelaySeconds: 30 # Time before the first check
+         periodSeconds: 10 # How often to perform the check
+         timeoutSeconds: 5 # Timeout for the check
+
+        readinessProbe:
+         httpGet:
+          path: /actuator/health
+          port: 8080
+         initialDelaySeconds: 15 # Time before the first check
+         periodSeconds: 5 # How often to perform the check
+         timeoutSeconds: 3 # Timeout for the check
+         
       # This is where you reference the secret1
       imagePullSecrets:
       - name: ghcr-pull-secret
