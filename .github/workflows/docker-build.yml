@@ -75,5 +75,10 @@ jobs:
          
       - name: Deploy to GKE
         run: |         
-         kubectl apply -f k8s/deployment.yml --validate=false
+         kubectl apply -f k8s/deployment.yml
+         
+         #Apply the Service manifest second.
+         #This creates or updates the service that exposes the pods.
+         kubectl apply -f k8s/service.yml
+         
          kubectl set image deployment/sample-test-api sample-container=${{ env.GHCR_IMAGE }}:${{ env.GHCR_IMAGE_TAG }}
