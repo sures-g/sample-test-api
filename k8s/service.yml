@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: sample-test-api
 spec:
+  type: LoadBalancer # This provisions a public IP
   selector:
     app: sample-test-api # This must match the 'app' label on your pods
   ports:
