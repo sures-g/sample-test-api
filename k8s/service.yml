@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-app-service
+  name: sample-test-api
 spec:
   selector:
     app: sample-test-api # This must match the 'app' label on your pods
