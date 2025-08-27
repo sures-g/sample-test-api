@@ -65,8 +65,6 @@ jobs:
          gcloud container clusters get-credentials sample-test --region asia-east1 --project for-tech-practice
          
       - name: Deploy to GKE
-        run: |
-         sed -i "s|image: .*|image: ${{ env.GHCR_IMAGE }}:${{ GHCR_IMAGE_TAG }}|" k8s/deployment.yaml
+        run: |         
          kubectl apply -f k8s/deployment.yml --validate=false
          kubectl set image deployment/sample-test-api sample-container=${{ env.GHCR_IMAGE }}:${{ env.GHCR_IMAGE_TAG }}
-         
